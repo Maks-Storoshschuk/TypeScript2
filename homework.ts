@@ -64,53 +64,46 @@ class fish implements IAnimal{
 }
 
 // 3
-interface A {
-    a:number
+
+abstract class Shape {
+    abstract area(): number;
+
+    abstract perimeter(): number;
 }
 
-interface B{
-    b:number
-}
+class Triangle extends Shape{
+    constructor(private a: number, private b: number){
+        super();
+    }
 
-class Shape implements A,B{
-    a: number;
-    b: number;
-    area(a:A,b:B):number{
-        return;
-    };
-    perimeter(a:A,b:B):number{
-       return;
-    };
-}
-
-class Triangle implements Shape{
-    a: number;
-    b: number;
-
-    area(a: A, b: B): number {
+    area(): number {
+        console.log('Area', (<any>this).constructor.name)
         return ((this.a*this.b)/2);
     }
 
-    perimeter(a: A, b: B): number {
+    perimeter(): number {
+        console.log('Perimeter', (<any>this).constructor.name)
         return (((this.a^2+this.b^2)^(1/2))+this.a+this.b);
     }
-
 }
 
-class Rectangle implements Shape{
-    a: number;
-    b: number;
-
-    area(a: A, b: B): number {
+class Rectangle extends Shape{
+    constructor(private a: number, private b: number) {
+        super();
+    }
+    area(): number {
+        console.log('Area', (<any>this).constructor.name)
         return (this.a*this.b)
     }
 
-    perimeter(a: A, b: B): number {
+    perimeter( ): number {
+        console.log('Perimeter', (<any>this).constructor.name)
         return ((this.a+this.b)*2)
     }
-
 }
 
+const shapes: Shape[] = [new Triangle(3,4), new Rectangle(4,5)]
 // кладем в массив экземпляры классов(количество может быть любым но мин 2)
 // проходимся циклом по нему и и высчитываем площадь для каждой фигуры
+
 
